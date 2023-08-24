@@ -18,10 +18,10 @@ Pour exécuter ce projet à l'aide de Docker, vous pouvez suivre ces étapes :
 L'interface phpMyAdmin (pour la gestion de la base de données) sera accessible à l'adresse : http://localhost:8081
 
 ## Configuration
-L'API utilise la base de données H2 par défaut. La configuration de la base de données peut être modifiée dans le fichier `application.properties` situé dans le répertoire `src/main/resources`. Vous pouvez y configurer les propriétés de connexion à la base de données telles que l'URL, le nom d'utilisateur et le mot de passe.
+L'API utilise la base de données MySQL. La configuration de la base de données peut être modifiée dans le fichier `application.properties` situé dans le répertoire `src/main/resources`. Vous pouvez y configurer les propriétés de connexion à la base de données telles que l'URL, le nom d'utilisateur et le mot de passe.
 
 ## Données Initiales
-Le projet est pré-configuré pour charger des données initiales dans la base de données H2 à partir du fichier `data.sql` situé dans le répertoire `src/main/resources`.
+Le projet est pré-configuré pour charger des données initiales dans la base de données à partir du fichier `data.sql` situé dans le répertoire `src/main/resources`.
 
 ## Utilisation
 Une fois l'application démarrée, vous pouvez accéder à l'API en utilisant l'URL suivante :
