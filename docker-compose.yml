@@ -1,9 +1,10 @@
 version: '3'
  
 services:
-  db:
-    image: mysql:5.7
-    container_name: db
+  mysql-db:
+    image: mysql
+    restart: always
+    container_name: mysql-db
     environment:
       MYSQL_ROOT_PASSWORD: pwd123
       MYSQL_DATABASE: hr_app
@@ -17,13 +18,27 @@ services:
     image: phpmyadmin/phpmyadmin
     container_name: pma
     links:
-      - db
+      - mysql-db
     environment:
-      PMA_HOST: db
+      PMA_HOST: mysql-db
       PMA_PORT: 3306
       PMA_ARBITRARY: 1
     restart: always
     ports:
-      - 8081:80
+      - 8081:80 
+  spring-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: spring-app
+    depends_on:
+      - mysql-db
+    ports:
+      - "9000:9000"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql-db:3306/hr_app
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: pwd123
+      
 volumes:
   dbdata:
