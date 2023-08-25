@@ -45,6 +45,7 @@ services:
       SPRING_DATASOURCE_URL: jdbc:mysql://mysql-db:3306/hr_app
       SPRING_DATASOURCE_USERNAME: root
       SPRING_DATASOURCE_PASSWORD: pwd123
+    restart: always
       
 networks:
   HR-network:
