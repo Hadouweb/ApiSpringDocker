@@ -12,12 +12,14 @@ services:
       MYSQL_PASSWORD: pwd123
     ports:
       - "6033:3306"
+    networks:
+      - HR-network
     volumes:
       - dbdata:/var/lib/mysql
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
     container_name: pma
-    links:
+    depends_on:
       - mysql-db
     environment:
       PMA_HOST: mysql-db
@@ -25,20 +27,27 @@ services:
       PMA_ARBITRARY: 1
     restart: always
     ports:
-      - 8081:80 
-  spring-app:
+      - 8081:80
+    networks:
+      - HR-network
+  hr-api:
     build:
       context: .
       dockerfile: Dockerfile
-    container_name: spring-app
+    container_name: HR-api
     depends_on:
       - mysql-db
     ports:
       - "9000:9000"
+    networks:
+      - HR-network
     environment:
       SPRING_DATASOURCE_URL: jdbc:mysql://mysql-db:3306/hr_app
       SPRING_DATASOURCE_USERNAME: root
       SPRING_DATASOURCE_PASSWORD: pwd123
       
+networks:
+  HR-network:
+
 volumes:
   dbdata:
