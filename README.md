@@ -12,8 +12,8 @@ Pour exécuter ce projet à l'aide de Docker, vous pouvez suivre ces étapes :
 1. Assurez-vous d'avoir Docker installé sur votre système.
 2. Clonez ce dépôt sur votre machine locale.
 3. Ouvrez un terminal et rendez-vous dans le répertoire racine du projet.
-4. Exécutez la commande suivante pour construire le projet avec Maven : mvn clean package
-5. Ensuite, exécutez la commande suivante pour démarrer les conteneurs Docker : docker-compose up -d
+4. Exécutez la commande suivante pour construire le projet avec Maven : `mvn clean package -Dmaven.test.skip=true`
+5. Ensuite, exécutez la commande suivante pour démarrer les conteneurs Docker : `docker-compose up -d`
 6. L'API sera accessible à l'adresse : http://localhost:9000/employees
 L'interface phpMyAdmin (pour la gestion de la base de données) sera accessible à l'adresse : http://localhost:8081
 
