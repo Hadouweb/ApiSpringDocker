@@ -16,53 +16,53 @@ import com.hr.api.service.EmployeeService;
 
 @RestController
 public class EmployeeController {
-    
-    @Autowired
-    private EmployeeService employeeService;
 
-    @GetMapping("/employees")
-    public Iterable<Employee> getEmployees() {
-        return employeeService.getEmployees();
-    }
+	@Autowired
+	private EmployeeService employeeService;
 
-    @GetMapping("/employees/{id}")
-    public Optional<Employee> getEmployee(@PathVariable Long id) {
-        return employeeService.getEmployee(id);
-    }
+	@GetMapping("/employees")
+	public Iterable<Employee> getEmployees() {
+		return employeeService.getEmployees();
+	}
 
-    @PostMapping("/employees/create/")
-    public Employee creatEmployee(@RequestBody Employee employee) {
-        return employeeService.saveEmployee(employee);
-    }
+	@GetMapping("/employees/{id}")
+	public Optional<Employee> getEmployee(@PathVariable Long id) {
+		return employeeService.getEmployee(id);
+	}
 
-    @PutMapping("/employees/update/{id}")
-    public Employee updatEmployee(@PathVariable Long id, @RequestBody Employee employee) {
-        Optional<Employee> em = employeeService.getEmployee(id);
-        if (!em.isPresent())
-            return null;
+	@PostMapping("/employees/create")
+	public Employee creatEmployee(@RequestBody Employee employee) {
+		return employeeService.saveEmployee(employee);
+	}
 
-        Employee currentEmployee = em.get();
+	@PutMapping("/employees/update/{id}")
+	public Employee updatEmployee(@PathVariable Long id, @RequestBody Employee employee) {
+		Optional<Employee> em = employeeService.getEmployee(id);
+		if (!em.isPresent())
+			return null;
 
-        String firstName = employee.getFirstName();
-        String lastName = employee.getLastName();
-        String mail = employee.getMail();
-        String password = employee.getPassword();
+		Employee currentEmployee = em.get();
 
-        if (firstName != null)
-            currentEmployee.setFirstName(firstName);
-        if (lastName != null)
-            currentEmployee.setFirstName(lastName);
-        if (mail != null)
-            currentEmployee.setMail(mail);
-        if (password != null)
-            currentEmployee.setPassword(password);
+		String firstName = employee.getFirstName();
+		String lastName = employee.getLastName();
+		String mail = employee.getMail();
+		String password = employee.getPassword();
 
-        employeeService.saveEmployee(currentEmployee);
-        return currentEmployee;
-    }
+		if (firstName != null)
+			currentEmployee.setFirstName(firstName);
+		if (lastName != null)
+			currentEmployee.setLastName(lastName);
+		if (mail != null)
+			currentEmployee.setMail(mail);
+		if (password != null)
+			currentEmployee.setPassword(password);
 
-    @DeleteMapping("/employees/remove/{id}")
-    public void deleteEmployee(@PathVariable Long id) {
-        employeeService.deleteEmployee(id);
-    }
+		employeeService.saveEmployee(currentEmployee);
+		return currentEmployee;
+	}
+
+	@DeleteMapping("/employees/remove/{id}")
+	public void deleteEmployee(@PathVariable Long id) {
+		employeeService.deleteEmployee(id);
+	}
 }
